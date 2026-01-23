@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://mgp02mkor0at"]
+
+[ext_resource type="PackedScene" uid="uid://cy3d1jlxuy1wt" path="res://23-24+Chassis+v7.fbx" id="1_a202f"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="23-24+Chassis+v7" parent="." instance=ExtResource("1_a202f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0019954443, 0, -0.012221515)
