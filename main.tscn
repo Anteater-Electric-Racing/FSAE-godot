@@ -1,57 +1,89 @@
-[gd_scene load_steps=6 format=3 uid="uid://mgp02mkor0at"]
+[gd_scene load_steps=9 format=3 uid="uid://mgp02mkor0at"]
 
 [ext_resource type="Script" uid="uid://clybttbk665tu" path="res://vehicle_body_3d.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cy3d1jlxuy1wt" path="res://23-24+Chassis+v7.fbx" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://b51vqfh0wc3yf" path="res://checker.png" id="3_h2yge"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0xm2m"]
+top_radius = 0.229
+bottom_radius = 0.229
+height = 0.152
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
 size = Vector3(0.36088562, 1.0606155, 1.5678711)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
-size = Vector3(20, 1, 20)
+size = Vector3(20, 1, 200)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1bvp3"]
-size = Vector3(20, 1, 20)
+lightmap_size_hint = Vector2i(1104, 1016)
+size = Vector3(20, 1, 200)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+albedo_texture = ExtResource("3_h2yge")
+uv1_scale = Vector3(-0.16, -0.16, -0.16)
+uv1_triplanar = true
 
 [node name="MainNode" type="Node3D"]
 
 [node name="Car" type="VehicleBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53, 0)
 mass = 250.0
 script = ExtResource("1_0xm2m")
 
 [node name="Wheel-FL" type="VehicleWheel3D" parent="Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.25, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.61, -0.2, 1.1)
 use_as_steering = true
-wheel_radius = 0.23
-suspension_travel = 0.035
-suspension_stiffness = 45.0
+wheel_radius = 0.229
+suspension_travel = 0.05
+suspension_stiffness = 100.0
+
+[node name="WheelFLMesh" type="MeshInstance3D" parent="Car/Wheel-FL"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_0xm2m")
 
 [node name="Wheel-FR" type="VehicleWheel3D" parent="Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.25, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, -0.2, 1.1)
 use_as_steering = true
-wheel_radius = 0.23
-suspension_travel = 0.035
-suspension_stiffness = 45.0
+wheel_radius = 0.229
+suspension_travel = 0.05
+suspension_stiffness = 100.0
+
+[node name="WheelFRMesh" type="MeshInstance3D" parent="Car/Wheel-FR"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_0xm2m")
 
 [node name="Wheel-BR" type="VehicleWheel3D" parent="Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.2, -0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, -0.2, -0.35)
 use_as_traction = true
-wheel_radius = 0.23
-suspension_travel = 0.04
-suspension_stiffness = 50.0
+wheel_radius = 0.229
+suspension_travel = 0.05
+suspension_stiffness = 100.0
+
+[node name="WheelBRMesh" type="MeshInstance3D" parent="Car/Wheel-BR"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_0xm2m")
 
 [node name="Wheel-BL" type="VehicleWheel3D" parent="Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.2, -0.3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.61, -0.2, -0.35)
 use_as_traction = true
-wheel_radius = 0.23
-suspension_travel = 0.04
-suspension_stiffness = 50.0
+wheel_radius = 0.229
+suspension_travel = 0.05
+suspension_stiffness = 100.0
+
+[node name="WheelBLMesh" type="MeshInstance3D" parent="Car/Wheel-BL"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_0xm2m")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Car"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0109939575, 0.24260661, 0.7018509)
 shape = SubResource("BoxShape3D_ig7tw")
 
 [node name="23-24+Chassis+v7" parent="Car" instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1.02, 0, 0, 0, 1.02, 0, 0, 0, 1.02, 0, 0, 0)
+
+[node name="CarCamera" type="Camera3D" parent="Car"]
+transform = Transform3D(-0.99999994, 5.0936695e-08, -7.105065e-08, 0, 0.8127246, 0.5826479, 8.742277e-08, 0.58264786, -0.81272465, -3.7159957e-08, 1.8543667, -1.7250603)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -60,11 +92,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_h2yge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00814724, 0.0037045479, -0.00058174133)
 mesh = SubResource("BoxMesh_1bvp3")
 skeleton = NodePath("")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.57196784, -0.22559461, 0.78864455, 0.0066644414, 0.96012795, 0.27948144, -0.82024914, 0.16511023, -0.5476588, 3.022727, 1.4996263, 0.31243593)
+surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.000573469, -0.62291074, 0.7822928, -0.00045663185, 0.78229296, 0.62291056, -0.99999976, 8.731151e-11, -0.00073306164, 6.3269935, 3.7748218, 0)
