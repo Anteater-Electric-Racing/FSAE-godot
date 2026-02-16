@@ -10,7 +10,7 @@ bottom_radius = 0.229
 height = 0.152
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
-size = Vector3(0.40912437, 0.5458107, 2.1531982)
+size = Vector3(0.40912437, 0.46384525, 2.1531982)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
 size = Vector3(20, 1, 500)
@@ -75,7 +75,7 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0
 mesh = SubResource("CylinderMesh_0xm2m")
 
 [node name="CarCollision" type="CollisionShape3D" parent="Car"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018708229, -0.01479578, 0.40918732)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018708229, -0.078035235, 0.40918732)
 shape = SubResource("BoxShape3D_ig7tw")
 
 [node name="23-24+Chassis+v7" parent="Car" instance=ExtResource("1_ig7tw")]
