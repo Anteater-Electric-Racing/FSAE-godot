@@ -13,15 +13,14 @@ height = 0.152
 size = Vector3(0.40912437, 0.5458107, 2.1531982)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h2yge"]
-size = Vector3(20, 1, 200)
+size = Vector3(20, 1, 500)
 
 [sub_resource type="BoxMesh" id="BoxMesh_1bvp3"]
 lightmap_size_hint = Vector2i(1104, 1016)
-size = Vector3(20, 1, 200)
+size = Vector3(20, 1, 500)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
 albedo_texture = ExtResource("3_h2yge")
-uv1_scale = Vector3(-0.16, -0.16, -0.16)
 uv1_triplanar = true
 
 [node name="MainNode" type="Node3D"]
@@ -35,8 +34,8 @@ script = ExtResource("1_0xm2m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.61, -0.2, 1.1)
 use_as_steering = true
 wheel_radius = 0.229
-suspension_travel = 0.05
-suspension_stiffness = 100.0
+suspension_travel = 0.025
+suspension_stiffness = 150.0
 
 [node name="WheelFLMesh" type="MeshInstance3D" parent="Car/Wheel-FL"]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -46,8 +45,8 @@ mesh = SubResource("CylinderMesh_0xm2m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, -0.2, 1.1)
 use_as_steering = true
 wheel_radius = 0.229
-suspension_travel = 0.05
-suspension_stiffness = 100.0
+suspension_travel = 0.025
+suspension_stiffness = 150.0
 
 [node name="WheelFRMesh" type="MeshInstance3D" parent="Car/Wheel-FR"]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -57,8 +56,8 @@ mesh = SubResource("CylinderMesh_0xm2m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, -0.2, -0.35)
 use_as_traction = true
 wheel_radius = 0.229
-suspension_travel = 0.05
-suspension_stiffness = 100.0
+suspension_travel = 0.025
+suspension_stiffness = 150.0
 
 [node name="WheelBRMesh" type="MeshInstance3D" parent="Car/Wheel-BR"]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -68,8 +67,8 @@ mesh = SubResource("CylinderMesh_0xm2m")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.61, -0.2, -0.35)
 use_as_traction = true
 wheel_radius = 0.229
-suspension_travel = 0.05
-suspension_stiffness = 100.0
+suspension_travel = 0.025
+suspension_stiffness = 150.0
 
 [node name="WheelBLMesh" type="MeshInstance3D" parent="Car/Wheel-BL"]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
@@ -89,10 +88,11 @@ transform = Transform3D(-0.99999994, 5.0936695e-08, -7.105065e-08, 0, 0.8127246,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -170, 0, 0)
 shape = SubResource("BoxShape3D_h2yge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008, 0, -0.001)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -170, 0, 0)
 mesh = SubResource("BoxMesh_1bvp3")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
@@ -101,10 +101,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 89.99999, -0.5, -109.89077)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 0, 0)
 shape = SubResource("BoxShape3D_h2yge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008, 0, -0.001)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 0, 0)
 mesh = SubResource("BoxMesh_1bvp3")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
@@ -113,10 +114,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180, -0.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 170, 0, 0)
 shape = SubResource("BoxShape3D_h2yge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008, 0, -0.001)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 170, 0, 0)
 mesh = SubResource("BoxMesh_1bvp3")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
@@ -125,10 +127,24 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 89.999985, -0.5, 110.10923)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130, 0, 0)
 shape = SubResource("BoxShape3D_h2yge")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.008, 0, -0.001)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 130, 0, 0)
+mesh = SubResource("BoxMesh_1bvp3")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
+
+[node name="Floor5" type="StaticBody3D" parent="."]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -20.109268, -1, 200.1092)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor5"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -110, 0.5, 200)
+shape = SubResource("BoxShape3D_h2yge")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor5"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -110, 0.5, 200)
 mesh = SubResource("BoxMesh_1bvp3")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
