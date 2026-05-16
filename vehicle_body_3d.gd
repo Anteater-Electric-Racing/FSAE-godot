@@ -2,7 +2,8 @@ extends VehicleBody3D
 
 const DISPLAY_DEBUG_SPEED = true
 
-var previousDisplayedSpeed = 0.0
+var previous_displayed_speed = 0.0
+var steer_normalized = 0.0
 
 const MAX_POWER = 500.0
 const ACCELERATION_STEP = 5.0
@@ -11,9 +12,9 @@ const MOTOR_RAMP_DOWN_STEP = 50.0
 const BRAKING_STEP = 1.0
 const BASE_DECEL = 5.0
 const MAX_BRAKING = 15.0
-const STEER_STEP = 0.25
+const STEER_STEP = 0.5
 const MAX_STEERING_ANGLE = 32.0
-const MAX_VEHICLE_SPEED_MPH = 60.0
+const MAX_VEHICLE_SPEED_MPH = 90.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,12 +29,15 @@ func deg_to_rad(deg):
 func rad_to_deg(rad):
 	return rad * 180 / PI
 	
-func kph_to_mph(kph):
+func kph_to_mph(kph) -> float:
 	return kph / 1.609
 	
-func throttle_function(current_speed):
+func throttle_function(current_speed) -> float:
 	# Connect engine power data here
 	return 1000.0
+	
+func norm_steering_angle(steer: float) -> float:
+	return steer * (90/PI)
 	
 func _physics_process(delta: float) -> void:
 	var steer = 0.0
@@ -69,17 +73,17 @@ func _physics_process(delta: float) -> void:
 	# Debug printing for vehicle speed
 	
 	if DISPLAY_DEBUG_SPEED:
-		var velocity_mps = linear_velocity.length()
+		var velocity_mps = round(linear_velocity.length() * 10)/10.0
 		
 		var velocity_kph = int(round(velocity_mps * 3.6))
 		
 		var velocity_mph = int(round(velocity_kph / 1.609))
 		
-		if velocity_kph != previousDisplayedSpeed:
-			var printString = "VEHICLE SPEED | " + str(velocity_kph) + " km/h" + " (" + str(velocity_mph) + " mph)"
+		if velocity_kph != previous_displayed_speed:
+			var printString = "VEHICLE SPEED | " + str(velocity_kph) + " km/h" + " [" + str(velocity_mps) + "m/s" + "] " + "(" + str(velocity_mph) + " mph) | STEER: " + str(steer_normalized)
 			print(printString)
 			
-		previousDisplayedSpeed = velocity_kph
+		previous_displayed_speed = velocity_kph
 		
 	# Update vehicle physics based on deltas
 	
@@ -108,17 +112,22 @@ func _physics_process(delta: float) -> void:
 				
 				
 			elif wheel.use_as_steering:
+				steer_normalized = round(wheel.steering*10/(deg_to_rad(MAX_STEERING_ANGLE)))/10.0
 				var steer_deg = rad_to_deg(wheel.steering)
-				var steer_rad = deg_to_rad(steer)
+				var steer_increment_rad = deg_to_rad(steer)
 				
 				if wheel.steering > PI:
 					wheel.steering /= PI
 				
 				if reset_steering:
 					wheel.steering = 0.0
-				elif steer > 0 and steer_deg + steer <= MAX_STEERING_ANGLE:
-					wheel.steering += steer_rad
-				elif steer < 0 and steer_deg + steer >= -MAX_STEERING_ANGLE:
-					wheel.steering += steer_rad
-					
-			
+				elif steer > 0:
+					if wheel.steering + steer_increment_rad <= deg_to_rad(MAX_STEERING_ANGLE):
+						wheel.steering += steer_increment_rad
+					else:
+						wheel.steering = deg_to_rad(MAX_STEERING_ANGLE)
+				elif steer < 0:
+					if wheel.steering + steer_increment_rad >= -deg_to_rad(MAX_STEERING_ANGLE):
+						wheel.steering += steer_increment_rad
+					else:
+						wheel.steering = deg_to_rad(-1 * MAX_STEERING_ANGLE)
